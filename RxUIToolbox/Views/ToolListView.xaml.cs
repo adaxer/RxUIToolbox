@@ -10,6 +10,7 @@ public partial class ToolListView
         this.WhenActivated(d =>
         {
             DataContext = ViewModel;
+            this.BindCommand(ViewModel, vm => vm.SelectCommand, v => v.list);
         });
     }
 }

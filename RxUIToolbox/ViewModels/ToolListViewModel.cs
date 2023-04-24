@@ -7,19 +7,30 @@ using System.Reactive;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
+using System;
+using Splat;
 
 namespace RxUIToolbox.ViewModels;
 
 public class ToolListViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly IToolsService toolsService;
+    private CancellationTokenSource? cts;
+    private ILogger logger;
 
-    public ToolListViewModel(IToolsService toolsService)
+    public ToolListViewModel(IToolsService toolsService, IFactory<ILogger> loggerFactory)
     {
         this.toolsService = toolsService;
-        LoadToolsCommand = ReactiveCommand.Create(LoadTools);
+        logger = loggerFactory.Create() ?? throw new ArgumentNullException("No ILogger seems to be defined");
+        LoadToolsCommand = ReactiveCommand.CreateFromTask<int>(LoadTools);
+        LoadToolsCommand.ThrownExceptions.Subscribe(e => logger.Write(e, e.Message, typeof(ToolListViewModel),LogLevel.Error));
+        SelectCommand = ReactiveCommand.Create(SelectTool);
+        CancelLoadCommand = ReactiveCommand.Create(() => cts?.Cancel(), LoadToolsCommand.IsExecuting);
     }
-    public ReactiveCommand<Unit, Unit> LoadToolsCommand { get; }
+    public ReactiveCommand<int, Unit> LoadToolsCommand { get; }
+    public ReactiveCommand<Unit, Unit> SelectCommand { get; }
+    public ReactiveCommand<Unit, Unit> CancelLoadCommand { get; }
+
 
     [Reactive]
     public ICollection<Tool>? Tools { get; private set; }
@@ -27,9 +38,22 @@ public class ToolListViewModel : ReactiveObject, IActivatableViewModel
 
     [Reactive]
     public Tool? CurrentTool { get; set; }
-    private void LoadTools()
+
+    private async Task LoadTools(int delayTime)
     {
         Tools = new List<Tool>();
-        Tools = toolsService.LoadTools().ToList();
+        logger.Write("Loading tools",LogLevel.Debug);
+        cts = new CancellationTokenSource();
+        Tools = (await toolsService.LoadTools(delayTime, cts.Token)).ToList();
+        logger.Write("Loaded tools", LogLevel.Debug);
     }
+
+    private void SelectTool()
+    {
+        if (CurrentTool != null)
+        {
+            toolsService.PostCurrentTool.OnNext(CurrentTool);
+        }
+    }
+
 }

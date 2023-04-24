@@ -10,10 +10,16 @@
     xmlns:v="clr-namespace:RxUIToolbox.ViewModels"
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="800">
-    
+
     <DockPanel>
         <UniformGrid Columns="3" Rows="1" DockPanel.Dock="Top">
             <Button Content="Load Tools" Command="{Binding LoadToolsCommand}" />
+            <Button Content="Load Tools slow" Command="{Binding LoadToolsCommand}">
+                <Button.CommandParameter>
+                    <s:Int32>5000</s:Int32>
+                </Button.CommandParameter>
+            </Button>
+            <Button Content="Cancel Load" Command="{Binding CancelLoadCommand}" />
         </UniformGrid>
         <ListView ItemsSource="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" x:Name="list">
             <ListView.View>
@@ -30,4 +36,5 @@
             </ListView.View>
         </ListView>
     </DockPanel>
+
 </r:ReactiveUserControl>

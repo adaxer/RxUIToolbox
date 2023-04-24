@@ -10,11 +10,14 @@ namespace RxUIToolbox.ViewModels;
 
 public class MainViewModel : ReactiveObject, IActivatableViewModel
 {
-    public MainViewModel()
-    {
-        Tools = Locator.Current.GetService<ToolListViewModel>() ?? throw new ArgumentNullException("ToolsViewModel not registered");
-        Workspace = Locator.Current.GetService<WorkspaceViewModel>() ?? throw new ArgumentNullException("WorkspaceViewModel not registered");
+    private readonly IFactory<ILogger> loggerFactory;
+    private ILogger? logger;
 
+    public MainViewModel(ToolListViewModel tools, WorkspaceViewModel workspace, IFactory<ILogger> loggerFactory)
+    {
+        Tools = tools;
+        Workspace = workspace;
+        this.loggerFactory = loggerFactory;
         this.WhenActivated((CompositeDisposable d) =>
         {
             HandleActivation();
@@ -31,6 +34,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
     private void HandleActivation()
     {
+        Logger.Write("Activating", LogLevel.Debug);
         UpdateTitle();
     }
 
@@ -48,6 +52,8 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
     public ToolListViewModel Tools { get; set; }
     public WorkspaceViewModel Workspace { get; set; }
+
+    private ILogger Logger => logger ??= (loggerFactory.Create() ?? throw new ArgumentNullException("No ILogger seems to be defined"));
 
 
     [Reactive]

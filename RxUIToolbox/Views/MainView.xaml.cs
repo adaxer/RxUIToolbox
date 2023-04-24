@@ -16,9 +16,7 @@ public partial class MainView
         InitializeComponent();
         this.WhenActivated(d =>
         {
-            DataContext = ViewModel = ((Parent as ViewModelViewHost)?.ViewModel as MainViewModel) ?? Locator.Current.GetService<MainViewModel>();
-
-            //this.OneWayBind(ViewModel, vm => vm.Tools, v => v.toolList.ViewModel);
+            DataContext = ViewModel;
         });
     }
 }

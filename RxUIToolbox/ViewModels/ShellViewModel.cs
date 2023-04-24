@@ -8,9 +8,9 @@ namespace RxUIToolbox.ViewModels;
 
 public class ShellViewModel : ReactiveObject, IActivatableViewModel
 {
-    public ShellViewModel()
+    public ShellViewModel(MainViewModel main)
     {
-        Main = Locator.Current.GetService<MainViewModel>() ?? throw new ArgumentNullException("MainViewModel not registered");
+        Main = main;
 
         this.WhenActivated((CompositeDisposable d) =>
         {

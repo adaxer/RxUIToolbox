@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using RxUIToolboxViewModels;
 using Splat;
 using System;
 using System.Reactive.Disposables;
@@ -13,10 +14,11 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
     private readonly IFactory<ILogger> loggerFactory;
     private ILogger? logger;
 
-    public MainViewModel(ToolListViewModel tools, WorkspaceViewModel workspace, IFactory<ILogger> loggerFactory)
+    public MainViewModel(ToolListViewModel tools, WorkspaceViewModel workspace, SidebarViewModel sidebar, IFactory<ILogger> loggerFactory)
     {
         Tools = tools;
         Workspace = workspace;
+        Sidebar = sidebar;
         this.loggerFactory = loggerFactory;
         this.WhenActivated((CompositeDisposable d) =>
         {
@@ -50,8 +52,9 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
     public ViewModelActivator Activator { get; }= new ViewModelActivator();
 
-    public ToolListViewModel Tools { get; set; }
-    public WorkspaceViewModel Workspace { get; set; }
+    public ToolListViewModel Tools { get; }
+    public WorkspaceViewModel Workspace { get; }
+    public SidebarViewModel Sidebar { get; }
 
     private ILogger Logger => logger ??= (loggerFactory.Create() ?? throw new ArgumentNullException("No ILogger seems to be defined"));
 

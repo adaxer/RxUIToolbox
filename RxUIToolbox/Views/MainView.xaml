@@ -11,6 +11,7 @@
         HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
     <DockPanel>
+        <r:ViewModelViewHost DockPanel.Dock="Right" ViewModel="{Binding Sidebar}" />
         <TextBlock Text="{Binding Title}" DockPanel.Dock="Bottom"/>
         <r:ViewModelViewHost ViewModel="{Binding Tools}" />
         <r:ViewModelViewHost ViewModel="{Binding Workspace}" />

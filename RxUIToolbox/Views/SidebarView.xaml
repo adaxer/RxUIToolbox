@@ -1,0 +1,27 @@
+﻿<rui:ReactiveUserControl x:Class="RxUIToolboxViews.SidebarView"
+    x:TypeArguments="vm:SidebarViewModel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:rui="http://reactiveui.net"
+    xmlns:i="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"                         
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="clr-namespace:RxUIToolboxViewModels"
+    xmlns:v="clr-namespace:RxUIToolboxViews"
+    mc:Ignorable="d" Width="300">
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:SideOneViewModel}">
+            <v:SideOneView/>
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" >
+            <Button Command="{Binding BackCommand}" Content="{i:PackIcon Kind=NavigateBefore}" Width="32"/>
+            <Button Command="{Binding ForwardCommand}" DockPanel.Dock="Right" Content="{i:PackIcon Kind=NavigateNext}" Width="32"/>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding CurrentViewModel.UrlPathSegment}" />
+        </DockPanel>
+        <rui:RoutedViewHost Router="{Binding Router}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    </DockPanel>
+</rui:ReactiveUserControl>

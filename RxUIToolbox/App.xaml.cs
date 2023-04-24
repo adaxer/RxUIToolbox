@@ -4,6 +4,8 @@ using ReactiveUI;
 using RxUIToolbox.Services;
 using RxUIToolbox.ViewModels;
 using RxUIToolbox.Views;
+using RxUIToolboxViewModels;
+using RxUIToolboxViews;
 using Splat;
 using Splat.Microsoft.Extensions.DependencyInjection;
 using System;
@@ -49,12 +51,19 @@ public partial class App : Application
         services.AddTransient(typeof(IFactory<>), typeof(GenericFactory<>));
         services.AddTransient<ILogger, TraceLogger>();
         services.AddTransient<IToolsService, ToolsService>();
+        services.AddSingleton(sp => sp.GetRequiredService<SidebarViewModel>() as IScreen);
 
         services.AddSingleton<ShellViewModel>();
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<ToolListViewModel>();
         services.AddTransient<WorkspaceViewModel>();
 
+        services.AddSingleton<SidebarViewModel>();
+        services.AddSingleton<SideOneViewModel>();
+
+        services.AddTransient<IViewFor<SidebarViewModel>, SidebarView>();
+        services.AddTransient<IViewFor<SideOneViewModel>, SideOneView>();
+        services.AddTransient<IViewFor<DiagramViewModel>, DiagramView>();
         services.AddTransient<IViewFor<ShellViewModel>, ShellView>();
         services.AddTransient<IViewFor<MainViewModel>, MainView>();
         services.AddTransient<IViewFor<ToolListViewModel>, ToolListView>();

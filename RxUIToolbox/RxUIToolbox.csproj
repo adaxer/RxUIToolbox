@@ -1,54 +1,48 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Assets\drill.svg" />
-    <None Remove="Assets\hammer.svg" />
-    <None Remove="Assets\pencil.svg" />
-    <None Remove="Assets\scissors.svg" />
-    <None Remove="Assets\wrench.svg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="ReactiveUI.Fody" Version="18.4.34" />
-    <PackageReference Include="ReactiveUI.WPF" Version="18.4.34" />
-    <PackageReference Include="System.Reactive" Version="5.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
-	  <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.6.8" />
+	<ItemGroup>
+		<PackageReference Include="ReactiveUI.Fody" Version="18.4.34" />
+		<PackageReference Include="ReactiveUI.WPF" Version="18.4.34" />
+		<PackageReference Include="System.Reactive" Version="5.0.0" />
+		<PackageReference Include="OxyPlot.Wpf" Version="2.1.2" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+		<PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.6.8" />
+		<PackageReference Include="Material.Icons.WPF" Version="1.2.0" />
 		<PackageReference Include="SVGImage" Version="3.0.0" />
-	    </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Assets\drill.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\hammer.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\pencil.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\scissors.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\wrench.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="Assets\drill.svg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\hammer.svg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\pencil.svg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\scissors.svg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\wrench.svg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Views\ShellView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\WorkspaceView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Views\ShellView.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Views\WorkspaceView.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+	</ItemGroup>
 
 </Project>

@@ -10,18 +10,10 @@
         mc:Ignorable="d" x:Name="root"
         HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="b2v" />
-
-        <!--<DataTemplate DataType="{x:Type vm:ToolListViewModel}" >
-            <v:ToolListView />
-        </DataTemplate>-->
-
-    </UserControl.Resources>
-
-    <DockPanel Background="Silver">
+    <DockPanel>
         <TextBlock Text="{Binding Title}" DockPanel.Dock="Bottom"/>
         <r:ViewModelViewHost ViewModel="{Binding Tools}" />
         <r:ViewModelViewHost ViewModel="{Binding Workspace}" />
         </DockPanel>
+
 </r:ReactiveUserControl>

@@ -8,11 +8,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\drill.svg" />
+    <None Remove="Assets\hammer.svg" />
+    <None Remove="Assets\pencil.svg" />
+    <None Remove="Assets\scissors.svg" />
+    <None Remove="Assets\wrench.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ReactiveUI.Fody" Version="18.4.34" />
     <PackageReference Include="ReactiveUI.WPF" Version="18.4.34" />
     <PackageReference Include="System.Reactive" Version="5.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
 	  <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.6.8" />
+		<PackageReference Include="SVGImage" Version="3.0.0" />
+	    </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\drill.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\hammer.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\pencil.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\scissors.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\wrench.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -48,6 +48,7 @@ public partial class App : Application
     {
         services.AddTransient(typeof(IFactory<>), typeof(GenericFactory<>));
         services.AddTransient<ILogger, TraceLogger>();
+        services.AddTransient<IToolsService, ToolsService>();
 
         services.AddSingleton<ShellViewModel>();
         services.AddSingleton<MainViewModel>();

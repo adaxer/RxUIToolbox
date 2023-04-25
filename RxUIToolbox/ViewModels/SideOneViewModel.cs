@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using RxUIToolbox;
 using System;
 using System.Reactive;
 
@@ -6,15 +7,18 @@ namespace RxUIToolboxViewModels;
 
 public class SideOneViewModel : ReactiveObject, IRoutableViewModel
 {
-    public SideOneViewModel(IScreen screen)
+    private readonly IFactory<DiagramViewModel> diagramFactory;
+
+    public SideOneViewModel(IScreen screen, IFactory<DiagramViewModel> diagramFactory)
     {
         HostScreen = screen;
+        this.diagramFactory = diagramFactory;
         ShowDiagramCommand = ReactiveCommand.Create(ShowDiagram);
     }
 
     private void ShowDiagram()
     {
-        HostScreen.Router.Navigate.Execute(new DiagramViewModel(HostScreen)).Subscribe();
+        HostScreen.Router.Navigate.Execute(diagramFactory.Create()!).Subscribe();
     }
 
     public string? UrlPathSegment => "SideOne";

@@ -1,6 +1,7 @@
 ﻿using DynamicData;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using RxUIToolbox;
 using Splat;
 using System;
 using System.Diagnostics;
@@ -15,9 +16,11 @@ namespace RxUIToolboxViewModels;
 public class SidebarViewModel : ReactiveObject, IScreen
 {
     private IRoutableViewModel? forwardViewModel;
+    private readonly IFactory<SideOneViewModel> sideOneFactory;
 
-    public SidebarViewModel()
+    public SidebarViewModel(IFactory<SideOneViewModel> sideOneFactory)
     {
+        this.sideOneFactory = sideOneFactory;
         Router = new RoutingState();
         Router.CurrentViewModel.Subscribe(vm => CurrentViewModel = vm);
 
@@ -65,8 +68,9 @@ public class SidebarViewModel : ReactiveObject, IScreen
     public ReactiveCommand<Unit, IRoutableViewModel?> BackCommand { get; }
     public ReactiveCommand<Unit, IRoutableViewModel> ForwardCommand { get; }
 
-    private void GoFirst()
+    private async void GoFirst()
     {
-        Router.Navigate.Execute(new SideOneViewModel(this)).Subscribe();
+        await Task.Delay(1000);
+        Router.Navigate.Execute(sideOneFactory.Create()!).Subscribe();
     }
 }

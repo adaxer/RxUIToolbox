@@ -59,7 +59,8 @@ public partial class App : Application
         services.AddTransient<WorkspaceViewModel>();
 
         services.AddSingleton<SidebarViewModel>();
-        services.AddSingleton<SideOneViewModel>();
+        services.AddTransient<DiagramViewModel>();
+        services.AddTransient<SideOneViewModel>();
 
         services.AddSingleton<IViewFor<SidebarViewModel>, SidebarView>();
         services.AddTransient<IViewFor<SideOneViewModel>, SideOneView>();

@@ -7,14 +7,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:RxUIToolbox.ViewModels"
         xmlns:v="clr-namespace:RxUIToolbox.Views"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" x:Name="root"
         HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
     <DockPanel>
         <r:ViewModelViewHost DockPanel.Dock="Right" ViewModel="{Binding Sidebar}" />
-        <TextBlock Text="{Binding Title}" DockPanel.Dock="Bottom"/>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <TextBlock Text="{Binding Title}" VerticalAlignment="Center"/>
+            <mah:ToggleSwitch Content="Togleme" VerticalAlignment="Center" Margin="10 0" IsOn="True"/>
+        </StackPanel>
         <r:ViewModelViewHost ViewModel="{Binding Tools}" />
         <r:ViewModelViewHost ViewModel="{Binding Workspace}" />
-        </DockPanel>
+    </DockPanel>
 
 </r:ReactiveUserControl>

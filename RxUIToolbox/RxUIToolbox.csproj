@@ -8,6 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MahApps.Metro" Version="2.4.9" />
 		<PackageReference Include="ReactiveUI.Fody" Version="18.4.34" />
 		<PackageReference Include="ReactiveUI.WPF" Version="18.4.34" />
 		<PackageReference Include="System.Reactive" Version="5.0.0" />
